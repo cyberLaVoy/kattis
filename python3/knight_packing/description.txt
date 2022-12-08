@@ -1,0 +1,12 @@
+Write a program, written in a programing language of your choice, that solves the following problem.
+
+Problem Introduction:
+On a N by N chess board, two players alternate placing a knight on the board. A knight can only be placed if there is no other knight which would be either 1 row and 2 columns or 2 rows and 1 column away from it. The first player who cannot place a knight on the board loses.
+
+Given the size of the board, compute if the first or second player wins.
+
+Program Input:
+The first and only line contains the integer N (1 <= N <= 1000), the size of the board.
+
+Program Output:
+Output first if the first player wins the game, or second if the second player wins the game.
