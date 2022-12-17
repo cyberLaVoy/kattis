@@ -1,29 +1,32 @@
+# import min-heap operations 
 from heapq import heappush, heappop
 
+# graph: a list of lists of tuples [ [ (edgeCost, w), ...], ...]
+# start: starting vertex as key to graph
+# Output: the shortest distance to all vertices from start vertex
 def Dijkstra(graph, start):
-    dist = [None] * len(graph)
+    distance = [None] * len(graph)
     queue = [(-1, start)]
     while len(queue) != 0:
         pathCost, v = heappop(queue)
-        if dist[v] is None: # v is unvisited
-            dist[v] = pathCost
-            for w, edgeCost in graph[v].items():
-                if dist[w] is None: # w is unvisited
+        if distance[v] is None:
+            distance[v] = pathCost
+            for edgeCost, w in graph[v]:
+                if distance[w] is None:
                     heappush(queue, (pathCost * edgeCost, w))
-    return dist
-
+    return distance
 
 def main():
     params = input().split()
     params = [int(x) for x in params]
     while not (params[0] == 0 and params[1] == 0):
-        graph = {}
+        graph = []
         for i in range(params[0]):
-            graph[i] = {}
+            graph.append([])
         for i in range(params[1]):
             edge = input().split()
-            graph[int(edge[0])][int(edge[1])] = float(edge[2])
-            graph[int(edge[1])][int(edge[0])] = float(edge[2])
+            graph[int(edge[0])].append( (float(edge[2]), int(edge[1])) )
+            graph[int(edge[1])].append( (float(edge[2]), int(edge[0])) )
         result = Dijkstra(graph, 0)
         scale = str( round(0 - result[-1],4) )
         if '.' not in scale:
